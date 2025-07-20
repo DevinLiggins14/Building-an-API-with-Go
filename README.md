@@ -1,4 +1,4 @@
-#  Go REST API on Linux
+#  Building an API with Go
 <table>
   <tr>
   </h1></td>
@@ -78,8 +78,95 @@ go mod init github.com repo url
 
 </p>
 
-## Step 2: Create an api.go file
-<br/><br/>
+## Step 2: Defining the API's data contract and entrypoint
+<br/>Next create a new directory api and a file inside it named api.go. The goal here is to define the "shape" of the data that the API will accept in requests and send back in responses. Placing this in its own package means there is a clear reusable data contract that other parts of the application can rely on.<br/>
+```go
+// Filename: api/api.go
+
+package api
+
+import (
+	"encoding/json"
+	"net/http"
+)
+
+// CoinBalanceParams defines the structure for the request parameters.
+// I use a struct here because it's Go's primary way to model data,
+// and it maps perfectly to JSON payloads.
+type CoinBalanceParams struct {
+	Username string
+}
+
+// CoinBalanceResponse defines the structure for the API's response.
+// This ensures that all responses from this endpoint have a consistent format,
+// which is crucial for the clients that will use my API.
+type CoinBalanceResponse struct {
+	// Success Code, e.g., 200 for OK, 400 for Bad Request
+	Code int
+	// Balance holds the actual data being requested.
+	Balance int64
+	// Username is included to confirm whose balance is being returned.
+	Username string
+}
+```
+
+
+<br/> With the project initialized, the next step is to create the main entrypoint for the executable. This is handled by the cmd/api/main.go file. The responsibilities of this file are to configure the application's core components, such as logging and routing and to launch the web server.
+
+This file follows the standard Go convention of placing the main package for an executable inside a cmd subdirectory. <br/>
+
+```go
+// Filename: cmd/api/main.go
+
+package main
+
+import (
+	"fmt"
+	"net/http"
+
+	// A powerful, lightweight router for building Go web services.
+	"github.com/go-chi/chi"
+	// A structured, pluggable logging library.
+	log "github.com/sirupsen/logrus"
+
+	// This is the project's internal package where the API logic will reside.
+	// The name 'avukadin/goapi' should be replaced with the project's actual module path.
+	"github.com/avukadin/goapi/internal/handlers"
+)
+
+func main() {
+	// Configure the logger to report the calling function's file and line number.
+	// This adds valuable context for debugging.
+	log.SetReportCaller(true)
+
+	// Initialize a new router from the chi library.
+	// The router is responsible for mapping incoming HTTP requests to handler functions.
+	var r *chi.Mux = chi.NewRouter()
+
+	// Delegate the responsibility of defining API routes to the handlers package.
+	// The router 'r' is passed to the handler, which will attach all the
+	// specific endpoints (e.g., /balance, /user).
+	handlers.Handler(r)
+
+	// Print a confirmation message and a banner to the console to show the server is starting.
+	fmt.Println("Starting GO API service...")
+	fmt.Println(`
+ ______     ______        ______     ______   __    
+/\  ___\   /\  __ \      /\  __ \   /\  == \ /\ \   
+\ \ \__ \  \ \ \/\ \     \ \  __ \  \ \  _-/ \ \ \  
+ \ \_____\  \ \_____\     \ \_\ \_\  \ \_\    \ \_\ 
+  \/_____/   \/_____/      \/_/\/_/   \/_/     \/_/ `)
+
+	// Start the HTTP server, instructing it to listen on port 8000 on the local machine.
+	// The server will use the configured chi router 'r' to process all requests.
+	err := http.ListenAndServe("localhost:8000", r)
+	if err != nil {
+		// If the server fails to start (e.g., port is in use), log the error and exit.
+		log.Error(err)
+	}
+}
+```
+
 <img src""/>
 
 <br/>  
