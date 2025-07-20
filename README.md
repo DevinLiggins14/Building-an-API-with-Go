@@ -1,61 +1,72 @@
-#  Building an API with Go
+# Building a RESTful API with Go
+
 <table>
   <tr>
-  </h1></td>
-    <td>
-      <p align="right">
-        <!-- Add icons for the main technologies used in this project. Find more at: https://github.com/devicons/devicon -->
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original-wordmark.svg" alt="go" width="60" height="60"/> 
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="60" height="60"/> 
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="60" height="60"/>
-        <!-- Add a database icon if applicable, e.g., postgresql, mongodb -->
-      </p>
+    <td valign="middle"><h1>Go REST API</h1></td>
+    <td valign="middle" align="right">
+      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original-wordmark.svg" alt="go" width="50" height="50"/> 
+      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="50" height="50"/> 
+      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="50" height="50"/>
     </td>
   </tr>
 </table>
 
 ## Description
-<br/> 
-<!-- 
-  Provide a high-level summary of your project here. 
-  - What is the purpose of this API? (e.g., "In this project, we build and deploy a RESTful API using Go...")
-  - What problem does it solve?
-  - What are the key technologies involved?
--->
-<br />
-<br/> Project Architecture: <br/>
-<!-- Add a link to your project's architecture diagram here. You can create one and upload it to your repository. -->
-<img src="[LINK_TO_YOUR_ARCHITECTURE_DIAGRAM_HERE]"/>
-<br/> 
-<!-- 
-  Provide a more detailed explanation of the project's architecture.
-  - Explain the flow of data.
-  - Describe the main components (e.g., API server, database, middleware).
-  - Mention the deployment environment (e.g., "The API is deployed on a RHEL 9 server and managed using systemd...").
--->
-<br/>
+
+This project involves building a secure, scalable, and production-ready RESTful API using Go (Golang). The primary goal is to demonstrate and apply core backend engineering principles, focusing specifically on best practices for **Golang code structure**, robust **package management** with Go Modules, implementing **middleware** for cross-cutting concerns like security, and securing endpoints with token-based **API authentication**. The API serves as a practical example of how to architect a web service that is both maintainable and performant, starting from the initial `go mod init` command to a fully functional application.
+
+## Project Architecture
+
+The architecture follows a clean, layered approach to separate concerns. All incoming HTTP requests are received by the `main.go` entrypoint, which initializes a `chi` router and a `logrus` structured logger. Requests are then passed through a chain of middleware, starting with the `Authorization` middleware located in the `internal/middleware` package. This middleware is responsible for validating user credentials against a data source before allowing the request to proceed. If authorized, the request is forwarded to the appropriate API handler (defined in `internal/handlers`), which contains the core business logic. This modular design, enforced by Go's package structure (using `cmd`, `internal`, and `api` directories), ensures the application is easy to test, scale, and maintain.
+
 
 ## Tech Stack & Services
 
-| **Service / Technology** | **Purpose**                                                                 |
-|--------------------------|-----------------------------------------------------------------------------|
-| **Go (Golang)**          | The core language used to build the high-performance REST API.              |
-| **[API Framework]**      | <!-- e.g., Gin, Gorilla Mux, net/http --> Used to handle routing and HTTP requests. |
-| **[Database]**           | <!-- e.g., PostgreSQL, MongoDB, SQLite --> Provides persistent storage for application data. |
-| **Docker (Optional)**    | Used to containerize the application for consistent deployment.             |
-| **Systemd**              | Manages the API as a background service on the Linux server.                |
-| **[Other Tools]**        | <!-- e.g., JWT for auth, Viper for config --> Describe any other libraries or tools. |
+<table>
+  <thead>
+    <tr>
+      <th>Service / Technology</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Go (Golang)</strong></td>
+      <td>The core language used to build the high-performance REST API.</td>
+    </tr>
+    <tr>
+      <td><strong>go-chi/chi</strong></td>
+      <td>A lightweight, idiomatic router for handling HTTP requests and defining API endpoints.</td>
+    </tr>
+    <tr>
+      <td><strong>[Database]</strong></td>
+      <td>Provides persistent storage for user and application data.</td>
+    </tr>
+    <tr>
+      <td><strong>logrus</strong></td>
+      <td>A structured, pluggable logging library for creating machine-readable logs.</td>
+    </tr>
+    <tr>
+      <td><strong>Docker (Optional)</strong></td>
+      <td>Used to containerize the application for consistent deployment.</td>
+    </tr>
+    <tr>
+      <td><strong>Systemd</strong></td>
+      <td>Manages the API as a background service on the Linux server.</td>
+    </tr>
+  </tbody>
+</table>
 
-### **Notes for Usage**
-1. **Required Software**: Go, Git, [Database Name].
-2. **Deployment Target**: A Linux server (e.g., RHEL, Ubuntu) with `systemd`.
+### Notes for Usage
+1.  **Required Software**: Go, Git, and a database client for the chosen database.
+2.  **Deployment Target**: A Linux server (e.g., RHEL, Ubuntu) with `systemd` is the primary deployment target.
 
 <p align="center">
-  
-### **Prerequisites**  
-- Have an [AWS account] or access to a Linux server.
-- Install [Go (Golang)].
-- Install the [AWS CLI] (if deploying to AWS).
+
+### **Prerequisites**
+*   Access to a Linux server or a local Linux environment.
+*   Go (Golang) version 1.18 or later installed.
+*   Git installed for version control.
 
 </p>
 
@@ -67,7 +78,7 @@
 go mod init github.com/DevinLiggins14/go-rest-api
 ```
 
-<img src"<img width="638" height="122" alt="image" src=https://github.com/user-attachments/assets/a9b7f75e-8d95-460a-985e-503a7e880705/>
+"<img width="638" height="122" alt="image" src=https://github.com/user-attachments/assets/a9b7f75e-8d95-460a-985e-503a7e880705/>
 
 <br/> 
 I start my project by running `go mod init` to create the essential `go.mod` file. This command officially establishes my project as a self-contained Go module. It gives my project a unique name that I will use for managing packages. This file will track all the external libraries and their exact versions that I add later. Following this practice ensures my project's dependencies are clear and that it can be reliably built by anyone.
