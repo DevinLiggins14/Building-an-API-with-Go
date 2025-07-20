@@ -78,13 +78,49 @@ go mod init github.com repo url
 
 </p>
 
-## Step 1: Local Setup & Configuration
-<!-- You can add a screenshot of your code editor or terminal during setup -->
+## Step 2: Create an api.go file
+<br/><br/>
 <img src""/>
 
-<br/> First 
+<br/>  
 <br/>
-```bash
-git clone [YOUR_REPOSITORY_URL]
-cd [YOUR_PROJECT_DIRECTORY]
-  
+
+
+## Step 2: Create an api.go file
+<br/><br/>
+<img src""/>
+
+<br/>  
+<br/>
+
+
+## Step 2: Create an api.go file
+<br/><br/>
+<img src""/>
+
+<br/>  
+<br/>
+
+
+## Step 2: Create an api.go file
+<br/><br/>
+<img src""/>
+
+<br/>  
+<br/>
+
+
+## Step 2: Create an api.go file
+<br/><br/>
+<img src""/>
+
+<br/>  
+<br/>
+
+
+## Step 2: Create an api.go file
+<br/><br/>
+<img src""/>
+
+<br/>  
+<br/>
