@@ -59,18 +59,22 @@
 
 </p>
 
-## Step 1: Local Setup & Configuration
-<!-- You can add a screenshot of your code editor or terminal during setup -->
-<img src""/>
+## Step 1: Local directory path set up
 
-<br/> First 
+<br/> The first and most important step is to initialize the project as a Go module. To do this, I will run the go mod init command followed by the repository URL I plan to use. <br/>
+
+```bash
+go mod init github.com/DevinLiggins14/go-rest-api
+```
+
+<img src"<img width="638" height="122" alt="image" src=https://github.com/user-attachments/assets/a9b7f75e-8d95-460a-985e-503a7e880705/>
+
+<br/> 
+I start my project by running `go mod init` to create the essential `go.mod` file. This command officially establishes my project as a self-contained Go module. It gives my project a unique name that I will use for managing packages. This file will track all the external libraries and their exact versions that I add later. Following this practice ensures my project's dependencies are clear and that it can be reliably built by anyone.
 <br/>
 ```bash
-git clone [YOUR_REPOSITORY_URL]
-cd [YOUR_PROJECT_DIRECTORY]
-
-
-
+go mod init github.com repo url
+```
 
 </p>
 
@@ -83,107 +87,4 @@ cd [YOUR_PROJECT_DIRECTORY]
 ```bash
 git clone [YOUR_REPOSITORY_URL]
 cd [YOUR_PROJECT_DIRECTORY]
-
-</p>
-
-## Step 1: Local Setup & Configuration
-<!-- You can add a screenshot of your code editor or terminal during setup -->
-<img src""/>
-
-<br/> First 
-<br/>
-```bash
-git clone [YOUR_REPOSITORY_URL]
-cd [YOUR_PROJECT_DIRECTORY]
-
-</p>
-
-## Step 1: Local Setup & Configuration
-<!-- You can add a screenshot of your code editor or terminal during setup -->
-<img src""/>
-
-<br/> First 
-<br/>
-```bash
-git clone [YOUR_REPOSITORY_URL]
-cd [YOUR_PROJECT_DIRECTORY]
-
-</p>
-
-## Step 1: Local Setup & Configuration
-<!-- You can add a screenshot of your code editor or terminal during setup -->
-<img src""/>
-
-<br/> First 
-<br/>
-```bash
-git clone [YOUR_REPOSITORY_URL]
-cd [YOUR_PROJECT_DIRECTORY]
-
-</p>
-
-## Step 1: Local Setup & Configuration
-<!-- You can add a screenshot of your code editor or terminal during setup -->
-<img src""/>
-
-<br/> First 
-<br/>
-```bash
-git clone [YOUR_REPOSITORY_URL]
-cd [YOUR_PROJECT_DIRECTORY]
-</p>
-
-## Step 1: Local Setup & Configuration
-<!-- You can add a screenshot of your code editor or terminal during setup -->
-<img src""/>
-
-<br/> First 
-<br/>
-```bash
-git clone [YOUR_REPOSITORY_URL]
-cd [YOUR_PROJECT_DIRECTORY]
-</p>
-
-## Step 1: Local Setup & Configuration
-<!-- You can add a screenshot of your code editor or terminal during setup -->
-<img src""/>
-
-<br/> First 
-<br/>
-```bash
-git clone [YOUR_REPOSITORY_URL]
-cd [YOUR_PROJECT_DIRECTORY]
-</p>
-
-## Step 1: Local Setup & Configuration
-<!-- You can add a screenshot of your code editor or terminal during setup -->
-<img src""/>
-
-<br/> First 
-<br/>
-```bash
-git clone [YOUR_REPOSITORY_URL]
-cd [YOUR_PROJECT_DIRECTORY]
-
-</p>
-
-## Step 1: Local Setup & Configuration
-<!-- You can add a screenshot of your code editor or terminal during setup -->
-<img src""/>
-
-<br/> First 
-<br/>
-```bash
-git clone [YOUR_REPOSITORY_URL]
-cd [YOUR_PROJECT_DIRECTORY]
-</p>
-
-## Step 1: Local Setup & Configuration
-<!-- You can add a screenshot of your code editor or terminal during setup -->
-<img src""/>
-
-<br/> First 
-<br/>
-```bash
-git clone [YOUR_REPOSITORY_URL]
-cd [YOUR_PROJECT_DIRECTORY]
+  
