@@ -61,9 +61,128 @@
 
 ## Step 1: Local Setup & Configuration
 <!-- You can add a screenshot of your code editor or terminal during setup -->
-<img src="[LINK_TO_A_SCREENSHOT_HERE]"/>
+<img src""/>
 
-<br/> First, clone the repository to your local machine and navigate into the project directory.
+<br/> First 
+<br/>
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd [YOUR_PROJECT_DIRECTORY]
+
+
+
+
+</p>
+
+## Step 1: Local Setup & Configuration
+<!-- You can add a screenshot of your code editor or terminal during setup -->
+<img src""/>
+
+<br/> First 
+<br/>
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd [YOUR_PROJECT_DIRECTORY]
+
+</p>
+
+## Step 1: Local Setup & Configuration
+<!-- You can add a screenshot of your code editor or terminal during setup -->
+<img src""/>
+
+<br/> First 
+<br/>
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd [YOUR_PROJECT_DIRECTORY]
+
+</p>
+
+## Step 1: Local Setup & Configuration
+<!-- You can add a screenshot of your code editor or terminal during setup -->
+<img src""/>
+
+<br/> First 
+<br/>
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd [YOUR_PROJECT_DIRECTORY]
+
+</p>
+
+## Step 1: Local Setup & Configuration
+<!-- You can add a screenshot of your code editor or terminal during setup -->
+<img src""/>
+
+<br/> First 
+<br/>
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd [YOUR_PROJECT_DIRECTORY]
+
+</p>
+
+## Step 1: Local Setup & Configuration
+<!-- You can add a screenshot of your code editor or terminal during setup -->
+<img src""/>
+
+<br/> First 
+<br/>
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd [YOUR_PROJECT_DIRECTORY]
+</p>
+
+## Step 1: Local Setup & Configuration
+<!-- You can add a screenshot of your code editor or terminal during setup -->
+<img src""/>
+
+<br/> First 
+<br/>
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd [YOUR_PROJECT_DIRECTORY]
+</p>
+
+## Step 1: Local Setup & Configuration
+<!-- You can add a screenshot of your code editor or terminal during setup -->
+<img src""/>
+
+<br/> First 
+<br/>
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd [YOUR_PROJECT_DIRECTORY]
+</p>
+
+## Step 1: Local Setup & Configuration
+<!-- You can add a screenshot of your code editor or terminal during setup -->
+<img src""/>
+
+<br/> First 
+<br/>
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd [YOUR_PROJECT_DIRECTORY]
+
+</p>
+
+## Step 1: Local Setup & Configuration
+<!-- You can add a screenshot of your code editor or terminal during setup -->
+<img src""/>
+
+<br/> First 
+<br/>
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd [YOUR_PROJECT_DIRECTORY]
+</p>
+
+## Step 1: Local Setup & Configuration
+<!-- You can add a screenshot of your code editor or terminal during setup -->
+<img src""/>
+
+<br/> First 
 <br/>
 ```bash
 git clone [YOUR_REPOSITORY_URL]
