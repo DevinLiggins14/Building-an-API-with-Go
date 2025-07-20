@@ -167,14 +167,151 @@ func main() {
 }
 ```
 
+<br/> The reason the standard log package was not chosen is because the standard log package is minimal. logrus is chosen because it provides structured logging. This allows for log entries to be formatted with rich, queryable context (e.g., as JSON), which is invaluable for monitoring, filtering, and analyzing logs in a production environment. <br/> 
+
+
 <img src""/>
 
 <br/>  
 <br/>
 
 
-## Step 2: Create an api.go file
-<br/><br/>
+## Step 3: Implementing Authorization Middleware and Standardized Error Handling
+<br/>  A new directory, internal/middleware, has been created to house functions that intercept and process HTTP requests before they reach their final destination (the API handler). This is a standard pattern for handling cross-cutting concerns like logging, authentication, and authorization.
+
+The first middleware implemented is for authorization. Its purpose is to protect endpoints by verifying that the incoming request includes a valid username and authorization token. <br/>
+
+```go
+// Filename: internal/middleware/authorization.go
+
+package middleware
+
+import (
+	"errors"
+	"net/http"
+
+	// This package defines the API's data contracts, including error responses.
+	"github.com/DevinLiggins14/go-rest-api/api"
+	// This internal package will contain database interaction logic.
+	"github.com/DevinLiggins14/go-rest-api/internal/tools"
+	log "github.com/sirupsen/logrus"
+)
+
+// UnAuthorizedError is a package-level error variable.
+// Defining it here ensures a consistent error message is used for all authorization failures.
+var UnAuthorizedError = errors.New("invalid username or token")
+
+// Authorization is a middleware function that enforces security checks.
+// It follows the standard Go middleware pattern: a function that accepts an http.Handler
+// and returns a new http.Handler.
+func Authorization(next http.Handler) http.Handler {
+	// The returned http.HandlerFunc is the actual middleware logic.
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
+		// 1. Extract credentials from the request.
+		var username string = r.URL.Query().Get("username")
+		var token = r.Header.Get("Authorization")
+		var err error
+
+		// 2. Perform initial validation. A username must be provided.
+		if username == "" {
+			api.RequestErrorHandler(w, UnAuthorizedError)
+			return // Stop processing the request here.
+		}
+
+		// 3. Access the database to get the user's stored credentials.
+		// Note: This creates a dependency on a 'tools' package for database operations.
+		var database *tools.DatabaseInterface
+		database, err = tools.NewDatabase()
+		if err != nil {
+			// If the database connection fails, it's an internal server error.
+			api.InternalErrorHandler(w)
+			return
+		}
+
+		// 4. Retrieve the expected login details for the given username.
+		var loginDetails *tools.LoginDetails
+		loginDetails = (*database).GetUserLoginDetails(username)
+
+		// 5. Perform the core authorization check.
+		// The request is unauthorized if the user doesn't exist (loginDetails is nil)
+		// or if the provided token does not match the one in the database.
+		if loginDetails == nil || (token != (*loginDetails).AuthToken) {
+			log.Error(UnAuthorizedError)
+			api.RequestErrorHandler(w, UnAuthorizedError)
+			return
+		}
+
+		// 6. If all checks pass, call the next handler in the chain.
+		// This passes control to the actual API endpoint handler (e.g., GetCoinBalance).
+		next.ServeHTTP(w, r)
+	})
+}
+```
+
+<br/> The function signature func(http.Handler) http.Handler allows handlers to be "chained" together. The next.ServeHTTP(w, r) call is the mechanism that passes the request down the chain. If this call is not made, the request processing stops, which is exactly how the authorization logic protects the endpoint.  <br/>
+
+
+<br/> To ensure that all error responses from the API have a consistent and predictable JSON structure, the api/api.go file has been updated with helper functions. This avoids scattering error-handling logic across the entire codebase. <br/>
+
+```go
+// Filename: api/api.go (Updated)
+
+package api
+
+import (
+	"encoding/json"
+	"net/http"
+)
+
+// CoinBalanceParams remains the same.
+type CoinBalanceParams struct {
+	Username string
+}
+
+// CoinBalanceResponse remains the same.
+type CoinBalanceResponse struct {
+	Code    int
+	Balance int64
+}
+
+// Error defines the standard structure for all JSON error responses.
+// This provides a consistent contract for API clients.
+type Error struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+}
+
+// writeError is a private helper function that centralizes the logic for
+// writing a JSON error response. It sets the content type, writes the
+
+// HTTP status code, and encodes the Error struct.
+func writeError(w http.ResponseWriter, message string, code int) {
+	resp := Error{
+		Code:    code,
+		Message: message,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
+
+	json.NewEncoder(w).Encode(resp)
+}
+
+// These exported function variables provide a clean, high-level API for error handling.
+// Other packages can call these without needing to know the implementation details.
+var (
+	// RequestErrorHandler is used for client-side errors (e.g., bad input).
+	RequestErrorHandler = func(w http.ResponseWriter, err error) {
+		writeError(w, err.Error(), http.StatusBadRequest) // 400 Bad Request
+	}
+	// InternalErrorHandler is used for server-side errors (e.g., database failure).
+	InternalErrorHandler = func(w http.ResponseWriter) {
+		writeError(w, "An unexpected error occurred.", http.StatusInternalServerError) // 500 Internal Server Error
+	}
+)
+```
+
 <img src""/>
 
 <br/>  
